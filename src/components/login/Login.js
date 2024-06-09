@@ -1,9 +1,8 @@
 import {Link} from 'react-router-dom';
 import {useState} from 'react';
 
-const Register = () => {
+const Login = () => {
   const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   return (
@@ -18,14 +17,6 @@ const Register = () => {
           required />
 
         <input
-          type="e-mail"
-          id='email'
-          placeholder='E-mail'
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-          required />
-
-        <input
           type="text"
           id="password"
           placeholder='Пароль'
@@ -33,13 +24,13 @@ const Register = () => {
           value={password}
           required />
 
-        <button>Зарегистрироваться</button>
+        <button>Войти</button>
 
-        <p>Уже есть аккаунт?</p>
-        <Link to="/"><button>Войти</button></Link>
+        <p>Хотите создать аккаунт?</p>
+        <Link to="/register"><button>Зарегистрироваться</button></Link>
       </form>
     </div>
   );
 };
 
-export default Register;
+export default Login;

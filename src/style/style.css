@@ -26,6 +26,10 @@ button {
   color: #fff;
   cursor: pointer;
 }
+a {
+  text-decoration: none;
+  color: #fff;
+}
 .container {
   display: flex;
   flex-direction: column;
@@ -73,4 +77,17 @@ button {
 }
 .aside p {
   color: #fff;
+}
+@media screen and (max-width: 768px) {
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  .aside {
+    border-left: none;
+    order: -1;
+    align-items: center;
+  }
 }
