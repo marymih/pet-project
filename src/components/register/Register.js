@@ -1,42 +1,61 @@
-import {Link} from 'react-router-dom';
-import {useState} from 'react';
+import { Link } from 'react-router-dom';
+import { useReducer } from 'react';
 
 const Register = () => {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case 'set':
+        return action.payload;
+      default:
+        return state;
+    }
+  };
+  const [username, dispatchUser] = useReducer(reducer, '');
+  const [email, dispatchEmail] = useReducer(reducer, '');
+  const [password, dispatchPassword] = useReducer(reducer, '');
 
   return (
-    <div className='form-wrapper'>
-      <form className='form'>
+    <div className="form-wrapper">
+      <form className="form">
         <input
           type="text"
-          id='username'
-          placeholder='Логин'
-          onChange={(e) => setUsername(e.target.value)}
+          id="username"
+          placeholder="Логин"
+          onChange={(e) =>
+            dispatchUser({ type: 'set', payload: e.target.value })
+          }
           value={username}
-          required />
+          required
+        />
 
         <input
           type="e-mail"
-          id='email'
-          placeholder='E-mail'
-          onChange={(e) => setEmail(e.target.value)}
+          id="email"
+          placeholder="E-mail"
+          onChange={(e) =>
+            dispatchEmail({ type: 'set', payload: e.target.value })
+          }
           value={email}
-          required />
+          required
+        />
 
         <input
           type="text"
           id="password"
-          placeholder='Пароль'
-          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Пароль"
+          onChange={(e) =>
+            dispatchPassword({ type: 'set', payload: e.target.value })
+          }
           value={password}
-          required />
+          required
+        />
 
         <button>Зарегистрироваться</button>
 
         <p>Уже есть аккаунт?</p>
-        <Link to="/"><button>Войти</button></Link>
+        <Link to="/">
+          <button>Войти</button>
+        </Link>
       </form>
     </div>
   );
