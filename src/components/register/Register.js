@@ -1,18 +1,29 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useReducer } from 'react';
 
 const Register = () => {
+  const navigate = useNavigate();
+
+  const initialState = {
+    username: '',
+    email: '',
+    password: '',
+  };
+
   const reducer = (state, action) => {
     switch (action.type) {
-      case 'set':
-        return action.payload;
+      case 'setUserName':
+        return { ...state, username: action.payload };
+      case 'setEmail':
+        return { ...state, email: action.payload };
+      case 'setPassword':
+        return { ...state, password: action.payload };
       default:
         return state;
     }
   };
-  const [username, dispatchUser] = useReducer(reducer, '');
-  const [email, dispatchEmail] = useReducer(reducer, '');
-  const [password, dispatchPassword] = useReducer(reducer, '');
+
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
     <div className="form-wrapper">
@@ -22,9 +33,9 @@ const Register = () => {
           id="username"
           placeholder="Логин"
           onChange={(e) =>
-            dispatchUser({ type: 'set', payload: e.target.value })
+            dispatch({ type: 'setUserName', payload: e.target.value })
           }
-          value={username}
+          value={state.username}
           required
         />
 
@@ -33,9 +44,9 @@ const Register = () => {
           id="email"
           placeholder="E-mail"
           onChange={(e) =>
-            dispatchEmail({ type: 'set', payload: e.target.value })
+            dispatch({ type: 'setEmail', payload: e.target.value })
           }
-          value={email}
+          value={state.email}
           required
         />
 
@@ -44,18 +55,23 @@ const Register = () => {
           id="password"
           placeholder="Пароль"
           onChange={(e) =>
-            dispatchPassword({ type: 'set', payload: e.target.value })
+            dispatch({ type: 'setPassword', payload: e.target.value })
           }
-          value={password}
+          value={state.password}
           required
         />
 
         <button>Зарегистрироваться</button>
 
         <p>Уже есть аккаунт?</p>
-        <Link to="/">
-          <button>Войти</button>
-        </Link>
+
+        <button
+          onClick={() => {
+            navigate('/login');
+          }}
+        >
+          Войти
+        </button>
       </form>
     </div>
   );

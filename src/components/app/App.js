@@ -9,7 +9,7 @@ function App() {
       <main className='content'>
         <Routes>
           <Route path='/register' element={<Register />} />
-          <Route path='/' element={<Login />} />
+          <Route path='/login' element={<Login />} />
         </Routes>
         <aside className='aside'>
           <h2>Lorem Ipsum</h2>
