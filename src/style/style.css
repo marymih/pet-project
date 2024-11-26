@@ -8,13 +8,15 @@
 html {
   font-family: 'Roboto', sans-serif;
 }
-body, html {
+body,
+html {
   height: 100%;
 }
 h2 {
   color: #fff;
 }
-input, button {
+input,
+button {
   margin: 5px;
   padding: 10px;
   border: none;
@@ -38,7 +40,7 @@ a {
 .footer {
   flex-shrink: 0;
   text-align: end;
-  background-color:rgb(92, 129, 232);
+  background-color: rgb(92, 129, 232);
   height: 40px;
 }
 .footer p {
@@ -78,7 +80,7 @@ a {
 .aside p {
   color: #fff;
 }
-.error-message {
+.form .error-message {
   color: red;
   font-size: 0.9em;
 }
