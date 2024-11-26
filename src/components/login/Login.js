@@ -35,7 +35,7 @@ const Login = () => {
   return (
     <div className="form-wrapper">
       <form className="form" onSubmit={handleSubmit}>
-        {error && <p>{error}</p>}
+        {error && <p className="error-message">{error}</p>}
         <input
           type="text"
           id="username"
@@ -54,11 +54,14 @@ const Login = () => {
           required
         />
 
-        <button type="submit" disabled={loading}>{loading ? 'Logged in...' : 'Login'}</button>
+        <button type="submit" disabled={loading}>
+          {loading ? 'Logged in...' : 'Login'}
+        </button>
 
         <p>Don't have an account?</p>
 
         <button
+          type="button"
           onClick={() => {
             navigate('/register');
           }}

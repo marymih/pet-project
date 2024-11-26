@@ -78,6 +78,10 @@ a {
 .aside p {
   color: #fff;
 }
+.error-message {
+  color: red;
+  font-size: 0.9em;
+}
 @media screen and (max-width: 768px) {
   .content {
     display: flex;
