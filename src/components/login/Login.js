@@ -1,62 +1,69 @@
 import { useNavigate } from 'react-router-dom';
-import { useReducer } from 'react';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import {
+  loginStart,
+  loginSuccess,
+  loginFailure,
+} from '../../features/authSlice';
 
 const Login = () => {
   const navigate = useNavigate();
 
-  const initialState = {
-    username: '',
-    password: '',
-  };
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.auth);
 
-  const reducer = (state, action) => {
-    switch (action.type) {
-      case 'setUserName':
-        return { ...state, username: action.payload };
-      case 'setPassword':
-        return { ...state, password: action.payload };
-      default:
-        return state;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    dispatch(loginStart());
+    try {
+      //simulate API request
+      const user = { id: 1, email: 'test@example.com', username }; // simulate user data
+      if (username === 'User' && password === 'password') {
+        dispatch(loginSuccess(user));
+      } else {
+        throw new Error('Invalid credentials');
+      }
+    } catch (err) {
+      dispatch(loginFailure(err.message));
     }
   };
 
-  const [state, dispatch] = useReducer(reducer, initialState);
-
   return (
     <div className="form-wrapper">
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit}>
+        {error && <p>{error}</p>}
         <input
           type="text"
           id="username"
-          placeholder="Логин"
-          onChange={(e) =>
-            dispatch({ type: 'setUserName', payload: e.target.value })
-          }
-          value={state.username}
+          placeholder="Username"
+          onChange={(e) => setUsername(e.target.value)}
+          value={username}
           required
         />
 
         <input
-          type="text"
+          type="password"
           id="password"
-          placeholder="Пароль"
-          onChange={(e) =>
-            dispatch({ type: 'setPassword', payload: e.target.value })
-          }
-          value={state.password}
+          placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
           required
         />
 
-        <button>Войти</button>
+        <button type="submit" disabled={loading}>{loading ? 'Logged in...' : 'Login'}</button>
 
-        <p>Хотите создать аккаунт?</p>
+        <p>Don't have an account?</p>
 
         <button
           onClick={() => {
             navigate('/register');
           }}
         >
-          Зарегистрироваться
+          Sign up
         </button>
       </form>
     </div>
